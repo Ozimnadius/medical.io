@@ -22,7 +22,7 @@ $(function () {
         slidesOffsetBefore: 20
     });
 
-    $('.call__input').mask('+7 (999) 999 - 99 - 99');
+    // $('.call__input').mask('+7 (999) 999 - 99 - 99');
 
     $('.item__top').on('click', function (e) {
         let $this = $(this),
@@ -34,5 +34,9 @@ $(function () {
         items.find('.item__bottom').slideUp(300);
         bottom.slideToggle(300);
         item.toggleClass('open');
+    });
+
+    $('.stick__close').on('click', function (e) {
+        $(this).closest('.stick').addClass('disabled');
     });
 });

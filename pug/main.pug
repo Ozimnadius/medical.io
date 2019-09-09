@@ -24,7 +24,7 @@ html(lang="ru")
                         .header__menu-btn
                             +icon('menu', 'menu__btn')
                         .header__tel
-                            a(href='tel:+7(925)455-25-25').tel
+                            a(href='tel:+7(925)455-25-25').tel.clickable-phone
                                 +icon('tel', 'tel__svg tel__svg_g')
             //- pages
             .page
@@ -46,7 +46,7 @@ html(lang="ru")
                     .fnav__call
                         .fnav__call-text Записаться на прием
                         .fnav__call-tel
-                            a(href='tel:+7(925)455-25-25').tel
+                            a(href='tel:+7(925)455-25-25').tel.clickable-phone
                                 +icon('tel', 'tel__svg')
                                 .tel__title + 7 (925) 455 25 25
 
@@ -79,7 +79,7 @@ html(lang="ru")
 
 
     //- stick
-    .stick.disabled
+    .stick
         button(type='button').stick__close
             +icon('close', 'stick__svg')
         a(href='tel:+7(925)455-25-25').stick__tel
@@ -109,7 +109,7 @@ html(lang="ru")
                 .nav__call
                     .nav__call-text Записаться на прием
                     .nav__call-tel
-                        a(href='tel:+7(925)455-25-25').tel
+                        a(href='tel:+7(925)455-25-25').tel.clickable-phone
                             +icon('tel', 'tel__svg')
                             .tel__title + 7 (925) 455 25 25
                 //- socials

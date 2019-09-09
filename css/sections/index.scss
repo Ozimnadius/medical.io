@@ -58,7 +58,6 @@
 
   &__button {
     width: 244px;
-    height: 44px;
     border-radius: 500px;
     background-image: linear-gradient(13.56deg, #0268A7 44.7%, #00ABDD 98.08%);
     display: flex;
@@ -66,6 +65,8 @@
     justify-content: center;
     text-align: center;
     margin: 0 auto;
+    padding-top: 16px;
+    padding-bottom: 12px;
 
     color: #ffffff;
     font-size: 14px;
@@ -232,7 +233,6 @@
 
   &__button {
     width: 194px;
-    height: 44px;
     border-radius: 500px;
     background-image: linear-gradient(16.87deg, #0268A7 44.7%, #00ABDD 98.08%);
     margin: 0 auto;
@@ -241,6 +241,8 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
+    padding-top: 16px;
+    padding-bottom: 12px;
   }
 
 }
@@ -252,6 +254,7 @@
   background-color: $bg;
   padding: 28px 13px 28px 25px;
   box-sizing: border-box;
+  height: auto;
 
   &__title {
     color: $text;

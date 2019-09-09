@@ -55,12 +55,12 @@ block content
             .edges__slider
                 .swiper-container.edges__container
                     .swiper-wrapper
-                        each i in [1,2,3,4,5]
+                        each i in edgesSlides
                             .swiper-slide.edge
                                 .edge__title Отзыв
                                 .edge__text
                                     img(src='images/icons/quote.svg').edge__text-img
-                                    span.edge__text-text Мы осуществляем более 1500 видов исследований. При обращении к нам вы можете пройти полноелабораторное обследование в удобное для вас время.
+                                    span.edge__text-text= i
                 .edges__round
 
             //- list
@@ -74,7 +74,7 @@ block content
 
         //- call
         section.call#callme
-            form.call__form
+            form(action="#" method='get').call__form.callback-with-ruphone
                 .call__title
                     |Запись на прием
                     br
@@ -84,7 +84,7 @@ block content
                     br
                     b через 5 сек.
                 .call__field
-                    input(type='tel' name='tel' placeholder='+7 (___) ___ - __ - __').call__input
+                    input(type='tel' name='phone' placeholder='+7 (___) ___ - __ - __').call__input
                 button(type='submit').call__submit ЗАПИСАТЬСЯ
                 .call__policy
                     | Заполняя данную форму Вы соглашаетесь

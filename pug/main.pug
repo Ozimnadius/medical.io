@@ -1,0 +1,126 @@
+include common/_mixins
+include common/_settings
+block variables
+
+doctype html
+html(lang="ru")
+    head
+        meta(charset="utf-8")
+        meta(content="ie=edge" http-equiv="x-ua-compatible")
+        meta(content="width=device-width, initial-scale=1" name="viewport")
+
+        title Portfolio | #{title}
+        link(rel='stylesheet' href='css/vendor.min.css')
+        link(rel='stylesheet' href='css/main.css')
+    body
+        .wrapper
+            //- heeader
+            header.header
+                .round
+                    .round__1
+                    .round__2
+                .container
+                    .header__wrap
+                        .header__menu-btn
+                            +icon('menu', 'menu__btn')
+                        .header__tel
+                            a(href='tel:+7(925)455-25-25').tel
+                                +icon('tel', 'tel__svg tel__svg_g')
+            //- pages
+            .page
+                block content
+
+            //- footer
+            footer.footer
+                .container
+                    .about
+                        .about__title О компании
+                        .about__desc Основная задача нашего проекта – сделать процесс записи к врачу максимально прозрачным, удобным и быстрым. Ежедневно команда экспертов своего дела, старается сделать невозможное для того, чтобы у наших пациентов была возможность получать только самые качественные услуги от высококвалифицированных специалистов.
+
+                .fnav
+                    .fnav__top
+                        .fnav__list
+                            each i in menu
+                                a(href=i.href class=i.dopClass).fnav__item= i.title
+                    //- call
+                    .fnav__call
+                        .fnav__call-text Записаться на прием
+                        .fnav__call-tel
+                            a(href='tel:+7(925)455-25-25').tel
+                                +icon('tel', 'tel__svg')
+                                .tel__title + 7 (925) 455 25 25
+
+                .copy © Все права защищены
+    .debug
+        div
+            div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+
+
+
+
+    //- stick
+    .stick.disabled
+        button(type='button').stick__close
+            +icon('close', 'stick__svg')
+        a(href='tel:+7(925)455-25-25').stick__tel
+            +icon('tel', 'stick__tel-svg')
+            .stick__tel-right
+                .stick__tel-desc Записаться на прием
+                .stick__tel-title + 7 (925) 455 25 25
+
+    //- nav
+    nav.nav
+        .container
+            //- top
+            .nav__top
+                .nav__close
+                    +icon('arr', 'nav__close-arr')
+                    .nav__close-text Меню
+
+            //- bottom
+            .nav__bottom
+                //- list
+                .nav__list
+                    each i in menu
+                        a(href=i.href class=i.dopClass).nav__item= i.title
+
+
+                //- call
+                .nav__call
+                    .nav__call-text Записаться на прием
+                    .nav__call-tel
+                        a(href='tel:+7(925)455-25-25').tel
+                            +icon('tel', 'tel__svg')
+                            .tel__title + 7 (925) 455 25 25
+                //- socials
+                .nav__socials.socials
+                    a(href='/').social
+                        img(src='images/icons/wapp.svg').social__img
+                    a(href='/').social
+                        img(src='images/icons/vk.svg').social__img
+                    a(href='/').social
+                        img(src='images/icons/viber.svg').social__img
+
+
+    script(src='js/vendor.min.js')
+    script(src='js/main.min.js')

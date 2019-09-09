@@ -1,0 +1,138 @@
+extends ../main
+
+block variables
+    - var title = 'Главная'
+
+block content
+    main.main
+        //- banner
+        section.banner
+            .round
+                .round__1
+                .round__2
+            //- img
+            .banner__img
+                .banner__pic
+                    img(src='images/content/banner/img.png').banner__pic-img
+                .banner__img-content
+                    .container
+                        .banner__stick
+                            | Запишитесь
+                            br
+                            | на прием к врачу
+                            br
+                            | со скидкой&nbsp;
+                            b.banner__stick_g до 50%
+            .container
+                //- button
+                a(href='#callme').banner__button ЗАПИСАТЬСЯ НА ПРИЕМ
+            .banner__round
+
+        //- services
+        section.servs
+            .servs__title
+                | Аппаратная диагностика
+                br
+                | и лаборатория
+            .servs__list
+                each i,x in servs
+                    .serv
+                        .serv__top
+                            .serv__img
+                                img(src='images/content/services/' + (x + 1) + '.svg').serv__pi
+                            .serv__title= i
+                        .serv__bottom
+                            .serv__content Мы осуществляем более 1500 видов исследований. При обращении к нам вы можете пройти полное лабораторное обследование в удобное для вас время.
+                            ul.serv__ul
+                                each i in servList
+                                    li.serv__li= i
+
+        //- advantages
+        section.edges
+            //- title
+            .edges__title Покупателям нравится
+            //- slider
+            .edges__slider
+                .swiper-container.edges__container
+                    .swiper-wrapper
+                        each i in [1,2,3,4,5]
+                            .swiper-slide.edge
+                                .edge__title Отзыв
+                                .edge__text
+                                    img(src='images/icons/quote.svg').edge__text-img
+                                    span.edge__text-text Мы осуществляем более 1500 видов исследований. При обращении к нам вы можете пройти полноелабораторное обследование в удобное для вас время.
+                .edges__round
+
+            //- list
+            .edges__list
+                each i in edgesList
+                    .edges__li
+                        .edges__li-title= i.title
+                        .edges__li-desc= i.desc
+            //- button
+            button(type='button').edges__button.jsAddRev ОСТАВИТЬ ОТЗЫВ
+
+        //- call
+        section.call#callme
+            form.call__form
+                .call__title
+                    |Запись на прием
+                    br
+                    |по телефону
+                .call__sub
+                    |Введите номер телефона и мы перезвоним вам&nbsp;
+                    br
+                    b через 5 сек.
+                .call__field
+                    input(type='tel' name='tel' placeholder='+7 (___) ___ - __ - __').call__input
+                button(type='submit').call__submit ЗАПИСАТЬСЯ
+                .call__policy
+                    | Заполняя данную форму Вы соглашаетесь
+                    br
+                    | с&nbsp;
+                    a(href='#').call__policy_u Политикой обработки персональных данных
+        //- map
+        section.map
+            .map__title 500 клиник в Москве
+            .map__img
+                img(src='images/content/map/map.jpg').map__pic
+        //- search
+        section.search
+            form.search__form
+                .search__top
+                    .search__field
+                        input(type='search' name='search').search__input
+                .search__list
+                    each i in searchList
+                        .item
+                            .item__top
+                                div(style='fill:'+i.color+';').item__img
+                                    +icon('metro', 'item__svg')
+                                .item__right
+                                    .item__title= i.title
+                                    .item__count 3 клиники рядом
+                            .item__bottom
+                                .item__list
+                                    .subitem
+                                        .subitem__img
+                                            img(src='images/icons/pin1.svg').subitem__svg
+                                        .subitem__right
+                                            .subitem__premium Премиум клиника
+                                            a(href='tel:+ 7(925)455-25-25').subitem__link ул. Левобережная
+                                            .subitem__road 5 минут от метро
+                                    .subitem
+                                        .subitem__img
+                                            img(src='images/icons/pin2.svg').subitem__svg
+                                        .subitem__right
+                                            a(href='tel:+ 7(925)455-25-25').subitem__link ул. Киевская
+                                            .subitem__road 5 минут от метро
+                                    .subitem
+                                        .subitem__img
+                                            img(src='images/icons/pin2.svg').subitem__svg
+                                        .subitem__right
+                                            a(href='tel:+ 7(925)455-25-25').subitem__link ул. Нагорная
+                                            .subitem__road 5 минут от метро
+
+
+
+

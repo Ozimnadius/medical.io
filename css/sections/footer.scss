@@ -1,0 +1,72 @@
+.footer {
+  background-color: #053f5e;
+}
+
+.about {
+  padding-top: 40px;
+  padding-bottom: 50px;
+
+  &__title {
+    color: $bg;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  &__desc {
+    color: #bababa;
+    font-size: 14px;
+    line-height: lh(14,16.24);
+  }
+
+
+}
+
+.fnav {
+
+  &__top {
+    padding: 0 20px;
+    padding-bottom: 50px;
+  }
+
+  &__list{
+    border-left: 1px solid #999999;
+    padding-left: 30px;
+  }
+
+  &__item {
+    display: block;
+    color: $bg;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  &__call {
+    background-color: #043752;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 23px 0;
+
+    &-text{
+      color: $bg;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.copy {
+  background-color: #032639;
+  text-align: center;
+  padding: 17px;
+  color: $bg;
+  font-size: 12px;
+}

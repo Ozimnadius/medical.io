@@ -64,6 +64,12 @@
     width: 40px;
     height: 40px;
     fill: #00ae65;
+
+    &_w{
+      width: 30px;
+      height: 30px;
+      fill: $bg;
+    }
   }
 
   &__title {
@@ -101,5 +107,266 @@
     background-image: linear-gradient(53.21deg, #0268A7 44.7%, #00ABDD 98.08%);
     opacity: 0.08;
     border-radius: 50%;
+  }
+}
+
+.popup {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  overflow-y: auto;
+  transition: .4s;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  &__wrapper{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.form{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: #0077b6;
+    padding: 21px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    color: $bg;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    color: $bg;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  &__block {
+    margin-bottom: 20px;
+  }
+
+  &__close {
+    &-svg{
+      width: 14px;
+      height: 14px;
+      fill: $bg;
+    }
+  }
+
+  &__bottom {
+    padding: 30px;
+    background-color: #015987;
+    flex-grow: 1;
+    padding-bottom: 45px;
+  }
+
+  &__rating {
+    display: flex;
+    margin-bottom: 25px;
+  }
+
+  &__fields{
+    margin-bottom: 30px;
+  }
+
+  &__field {
+    margin-bottom: 30px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+
+  }
+
+  &__policy{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    line-height: lh(10,15);
+    text-align: center;
+    margin-bottom: 25px;
+    &_u {
+      text-decoration: underline;
+    }
+  }
+
+  &__recaptcha {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__submit {
+    width: 172px;
+    border-radius: 500px;
+    background-color: #04b86c;
+    margin: 0 auto;
+    display: block;
+
+    color: $bg;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 16px;
+    padding-bottom: 12px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    opacity: .7;
+    pointer-events: none;
+
+    &.active{
+      pointer-events: initial;
+      opacity: 1;
+    }
+  }
+}
+
+.rating {
+
+  &__title {
+    color: rgba($bg,.8);
+  }
+
+  &__input {
+    display: none;
+
+    &:checked ~ .rating__star {
+      svg {
+        fill: #ed8a19;
+        stroke: #ed8a19;
+      }
+    }
+  }
+
+  &__star {
+    padding: 0 2.5px;
+    cursor: pointer;
+
+    &:first-child {
+      margin-right: 0;
+    }
+
+    svg {
+      fill: transparent;
+      width: 32px;
+      height: 31px;
+      stroke: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover, &:hover ~ .rating__star {
+      svg {
+        fill: #ed8a19;
+        stroke: #ed8a19;
+      }
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+
+    &:hover .rating__star {
+      svg {
+        fill: transparent;
+        stroke: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    &:hover .rating__star:hover,
+    &:hover .rating__star:hover ~ .rating__star {
+      svg {
+        fill: #ed8a19;
+        stroke: #ed8a19;
+      }
+    }
+
+  }
+}
+
+.input {
+  width: 100%;
+  border-radius: 12px;
+  background-color: $bg;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 15px;
+
+  &::placeholder {
+    color: #a5a5a5;
+  }
+
+  &_area {
+    height: 220px;
+  }
+
+}
+
+.success{
+  width: 300px;
+  height: 220px;
+  border-radius: 12px;
+  background-color: $bg;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  text-align: center;
+
+  &__close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    &-svg{
+      width: 14px;
+      height: 14px;
+      fill: #e1e1e1;
+    }
+  }
+
+  &__text{
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: lh(18,23.67);
+  }
+
+  &__button {
+    width: 172px;
+    border-radius: 500px;
+    background-color: #04b86c;
+    margin: 0 auto;
+    display: block;
+
+    color: $bg;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 16px;
+    padding-bottom: 12px;
+    margin-top: 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 }

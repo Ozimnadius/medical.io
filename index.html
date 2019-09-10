@@ -167,6 +167,7 @@
                 <input class="call__input" type="tel" name="phone" placeholder="+7 (___) ___ - __ - __">
               </div>
               <button class="call__submit" type="submit">ЗАПИСАТЬСЯ</button>
+              <input type="hidden" name="action" value="callback">
               <div class="call__policy">Заполняя данную форму Вы соглашаетесь<br>с&nbsp;<a class="call__policy_u" href="#">Политикой обработки персональных данных</a></div>
             </form>
           </section>
@@ -179,6 +180,7 @@
               <div class="search__top">
                 <div class="search__field">
                   <input class="search__input" type="search" name="search">
+                  <input type="hidden" name="action" value="searchAjax">
                 </div>
               </div>
               <div class="search__list">
@@ -376,7 +378,7 @@
         </div>
         <div class="fnav">
           <div class="fnav__top">
-            <div class="fnav__list"><a class="fnav__item" href="#callme">Запись на прием</a><a class="fnav__item" href="#clinics">Клиники</a><a class="fnav__item" href="#servs">Услуги</a><a class="jsAddRev fnav__item" href="#">оставить отзыв</a><a class="jsAddClinic fnav__item" href="#">Добавить клинику</a><a class="jsOpenPolicy fnav__item" href="#">политика</a>
+            <div class="fnav__list"><a class="jsCallme fnav__item" href="#callme">Запись на прием</a><a class="fnav__item" href="#clinics">Клиники</a><a class="fnav__item" href="#servs">Услуги</a><a class="jsAddRev fnav__item" href="#">оставить отзыв</a><a class="jsAddClinic fnav__item" href="#">Добавить клинику</a><a class="jsOpenPolicy fnav__item" href="#">политика</a>
             </div>
           </div>
           <div class="fnav__call">
@@ -433,30 +435,159 @@
       </div></a>
   </div>
   <nav class="nav">
-    <div class="container">
-      <div class="nav__top">
-        <div class="nav__close">
-          <svg class="nav__close-arr">
-            <use xlink:href="/images/icons/sprite.svg#arr"></use>
-          </svg>
-          <div class="nav__close-text">Меню</div>
-        </div>
+    <div class="nav__top">
+      <div class="nav__close">
+        <svg class="nav__close-arr">
+          <use xlink:href="/images/icons/sprite.svg#arr"></use>
+        </svg>
+        <div class="nav__close-text">Меню</div>
       </div>
-      <div class="nav__bottom">
-        <div class="nav__list"><a class="nav__item" href="#callme">Запись на прием</a><a class="nav__item" href="#clinics">Клиники</a><a class="nav__item" href="#servs">Услуги</a><a class="jsAddRev nav__item" href="#">оставить отзыв</a><a class="jsAddClinic nav__item" href="#">Добавить клинику</a><a class="jsOpenPolicy nav__item" href="#">политика</a>
-        </div>
+    </div>
+    <div class="nav__bottom">
+      <div class="nav__list"><a class="jsCallme nav__item" href="#callme">Запись на прием</a><a class="nav__item" href="#clinics">Клиники</a><a class="nav__item" href="#servs">Услуги</a><a class="jsAddRev nav__item" href="#">оставить отзыв</a><a class="jsAddClinic nav__item" href="#">Добавить клинику</a><a class="jsOpenPolicy nav__item" href="#">политика</a>
+      </div>
+      <div class="nav__footer">
         <div class="nav__call">
           <div class="nav__call-text">Записаться на прием</div>
           <div class="nav__call-tel"><a class="tel clickable-phone" href="tel:+7(925)455-25-25">
-              <svg class="tel__svg">
+              <svg class="tel__svg tel__svg_w">
                 <use xlink:href="/images/icons/sprite.svg#tel"></use>
               </svg>
               <div class="tel__title">+ 7 (925) 455 25 25</div></a></div>
         </div>
-        <div class="nav__socials socials"><a class="social" href="/"><img class="social__img" src="images/icons/wapp.svg"></a><a class="social" href="/"><img class="social__img" src="images/icons/vk.svg"></a><a class="social" href="/"><img class="social__img" src="images/icons/viber.svg"></a></div>
+        <div class="nav__socials">
+          <div class="nav__socials-title">Напишите нам</div>
+          <div class="socials"><a class="social" href="https://wa.me/79254552525" target="_blank"><img class="social__img" src="images/icons/wapp.svg"></a><a class="social" href="https://vk.com/" target="_blank"><img class="social__img" src="images/icons/vk.svg"></a><a class="social" href="viber://chat?number=79254552525" target="_blank"><img class="social__img" src="images/icons/viber.svg"></a></div>
+        </div>
       </div>
     </div>
   </nav>
+  <div class="popup"></div>
+  <div class="template" hidden id="rev">
+    <form class="rev form">
+      <div class="form__top">
+        <div class="form__title">Оставить отзыв</div>
+        <button class="form__close" type="button">
+          <svg class="form__close-svg">
+            <use xlink:href="/images/icons/sprite.svg#close"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="form__bottom">
+        <div class="form__rating">
+          <div class="rating">
+            <div class="rating__wrapper">
+              <input class="rating__input" type="radio" name="rating" value="5" id="form-rating-5">
+              <label class="rating__star" for="form-rating-5">
+                <svg class="rating__star-svg">
+                  <use xlink:href="/images/icons/sprite.svg#star"></use>
+                </svg>
+              </label>
+              <input class="rating__input" type="radio" name="rating" value="4" id="form-rating-4">
+              <label class="rating__star" for="form-rating-4">
+                <svg class="rating__star-svg">
+                  <use xlink:href="/images/icons/sprite.svg#star"></use>
+                </svg>
+              </label>
+              <input class="rating__input" type="radio" name="rating" value="3" id="form-rating-3">
+              <label class="rating__star" for="form-rating-3">
+                <svg class="rating__star-svg">
+                  <use xlink:href="/images/icons/sprite.svg#star"></use>
+                </svg>
+              </label>
+              <input class="rating__input" type="radio" name="rating" value="2" id="form-rating-2">
+              <label class="rating__star" for="form-rating-2">
+                <svg class="rating__star-svg">
+                  <use xlink:href="/images/icons/sprite.svg#star"></use>
+                </svg>
+              </label>
+              <input class="rating__input" type="radio" name="rating" value="1" id="form-rating-1">
+              <label class="rating__star" for="form-rating-1">
+                <svg class="rating__star-svg">
+                  <use xlink:href="/images/icons/sprite.svg#star"></use>
+                </svg>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form__fields">
+          <div class="form__field">
+            <textarea class="input input_area" name="revComment" placeholder="Текст вашего отзыва"></textarea>
+          </div>
+          <div class="form__field">
+            <input class="input" type="text" name="revName" placeholder="Имя*" required>
+          </div>
+          <div class="form__field">
+            <input class="input" type="tel" name="renTel" placeholder="+7 (___) ___ - __ - __">
+          </div>
+          <div class="form__field">
+            <input class="input" type="text" name="revDate" placeholder="Дата рождения*">
+          </div>
+        </div>
+        <div class="form__policy">Заполняя данную форму Вы соглашаетесь<br>с&nbsp;<a class="form__policy_u" href="#">Политикой обработки персональных данных</a></div>
+        <div class="form__recaptcha">
+          <div id="recaptcha"></div>
+        </div>
+        <button class="form__submit" type="submit">ОТПРАВИТЬ</button>
+        <input type="hidden" name="action" value="addRev">
+      </div>
+    </form>
+  </div>
+  <div class="template" hidden id="add">
+    <form class="add form">
+      <div class="form__top">
+        <div class="form__title">Добавить клинику</div>
+        <button class="form__close" type="button">
+          <svg class="form__close-svg">
+            <use xlink:href="/images/icons/sprite.svg#close"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="form__bottom">
+        <div class="form__block">
+          <div class="form__subtitle">Расскажите о клинике</div>
+          <div class="form__fields">
+            <div class="form__field">
+              <input class="input" type="text" name="addTitle" placeholder="Название">
+            </div>
+            <div class="form__field">
+              <input class="input" type="text" name="addSite" placeholder="Сайт">
+            </div>
+            <div class="form__field">
+              <input class="input" type="text" name="addCity" placeholder="Город">
+            </div>
+            <div class="form__field">
+              <input class="input" type="text" name="addAddr" placeholder="Адрес">
+            </div>
+          </div>
+        </div>
+        <div class="form__block">
+          <div class="form__subtitle">Расскажите о себе</div>
+          <div class="form__fields">
+            <div class="form__field">
+              <input class="input" type="text" name="addName" placeholder="ФИО">
+            </div>
+            <div class="form__field">
+              <input class="input" type="text" name="addProf" placeholder="Должность">
+            </div>
+            <div class="form__field">
+              <input class="input" type="tel" name="addTel" placeholder="Телефон">
+            </div>
+            <div class="form__field">
+              <input class="input" type="email" name="addEmail" placeholder="E-mail">
+            </div>
+          </div>
+        </div>
+        <div class="form__policy">Заполняя данную форму Вы соглашаетесь<br>с&nbsp;<a class="form__policy_u" href="#">Политикой обработки персональных данных</a></div>
+        <div class="form__recaptcha">
+          <div id="recaptcha"></div>
+        </div>
+        <button class="form__submit" type="submit">ОТПРАВИТЬ</button>
+        <input type="hidden" name="action" value="addClinic">
+      </div>
+    </form>
+  </div>
   <script src="js/vendor.min.js"></script>
+  <script async defer src="https://www.google.com/recaptcha/api.js"></script>
   <script src="js/main.min.js"></script>
 </html>

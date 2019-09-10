@@ -1,6 +1,14 @@
 <?php
 header('Content-Type: application/json');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require $_SERVER['DOCUMENT_ROOT'] . '/php/PHPMailer/src/Exception.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/php/PHPMailer/src/PHPMailer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/php/PHPMailer/src/SMTP.php';
+
+
 $data = $_POST;
 $action = $data['action'];
 switch ($action) {
@@ -12,16 +20,18 @@ switch ($action) {
         exit();
         break;
     case 'addRev':
+        $result = getRevResult();
         echo json_encode(array(
-            'status' => true,
-            'html' => getRevResult()
+            'status' => $result['status'],
+            'html' => $result['html']
         ));
         exit();
         break;
     case 'addClinic':
+        $result = getAddClinicResult();
         echo json_encode(array(
-            'status' => true,
-            'html' => getAddClinicResult()
+            'status' => $result['status'],
+            'html' => $result['html']
         ));
         exit();
         break;
@@ -32,13 +42,23 @@ switch ($action) {
         ));
         exit();
         break;
-
     default:
         echo json_encode(array(
             'status' => false,
         ));
         exit();
         break;
+}
+
+function checkRecaptcha()
+{
+    require_once('recaptcha-php/recaptchalib.php');
+    $privatekey = "6LdvmLcUAAAAAAMBESxjPsZboWRo59L4OfaBOIHz";
+    $resp = recaptcha_check_answer($privatekey,
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["recaptcha_challenge_field"],
+        $_POST["recaptcha_response_field"]);
+    return !$resp->is_valid;
 }
 
 function getSearchResult()
@@ -164,48 +184,153 @@ function getSearchResult()
 
 function getRevResult()
 {
-    ob_start();
-    ?>
-    <div class="success">
-        <button type="button" class="success__close">
-            <svg class="success__close-svg">
-                <use xlink:href="/images/icons/sprite.svg#close"></use>
-            </svg>
-        </button>
-        <div class="success__text">
-            Спасибо!
-            <br>
-            Ваш отзыв принят в обработку.
-        </div>
-    </div>
-    <?
-    $html = ob_get_contents();
-    ob_end_clean();
-    return $html;
+
+
+    if (checkRecaptcha()) {
+        ob_start();
+        ?>
+        <table>
+            <tr>
+                <td>
+                    Рейтинг: <?= $_POST['rating'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Отзыв: <?= $_POST['revComment'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Имя: <?= $_POST['revName'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Телефон: <?= $_POST['renTel'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Дата: <?= $_POST['revDate'] ?>
+                </td>
+            </tr>
+        </table>
+        <?
+        $htmlMail = ob_get_contents();
+        ob_end_clean();
+
+
+        $status = mailTo(['client@web-comp.ru'], 'Добавление отзыва', $htmlMail);
+        if ($status) {
+            ob_start();
+            ?>
+            <div class="success">
+                <button type="button" class="success__close">
+                    <svg class="success__close-svg">
+                        <use xlink:href="/images/icons/sprite.svg#close"></use>
+                    </svg>
+                </button>
+                <div class="success__text">
+                    Спасибо!
+                    <br>
+                    Ваш отзыв принят в обработку.
+                </div>
+            </div>
+            <?
+            $html = ob_get_contents();
+            ob_end_clean();
+            return ['html' => $html, 'status' => true];
+        } else {
+            return ['html' => '', 'status' => false];
+        }
+    } else {
+        return ['html' => '', 'status' => false];
+    }
+
 }
 
 function getAddClinicResult()
 {
-    ob_start();
-    ?>
-    <div class="success">
-        <button type="button" class="success__close">
-            <svg class="success__close-svg">
-                <use xlink:href="/images/icons/sprite.svg#close"></use>
-            </svg>
-        </button>
-        <div class="success__text">
-            Спасибо!
-            <br>
-            Мы добавим Вашу <br>
-            клинику после обработки <br>
-            информации
-        </div>
-    </div>
-    <?
-    $html = ob_get_contents();
-    ob_end_clean();
-    return $html;
+    if (checkRecaptcha()) {
+        ob_start();
+        ?>
+        <table>
+            <tr>
+                <td>
+                    Название: <?= $_POST['addTitle'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Сайт: <?= $_POST['addSite'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Город: <?= $_POST['addCity'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Адрес: <?= $_POST['addAddr'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ФИО: <?= $_POST['addName'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Должность: <?= $_POST['addProf'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Телефон: <?= $_POST['addTel'] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email: <?= $_POST['addEmail'] ?>
+                </td>
+            </tr>
+
+        </table>
+        <?
+        $htmlMail = ob_get_contents();
+        ob_end_clean();
+
+
+        $status = mailTo(['client@web-comp.ru'], 'Добавление клиники', $htmlMail);
+        if ($status) {
+            ob_start();
+            ?>
+            <div class="success">
+                <button type="button" class="success__close">
+                    <svg class="success__close-svg">
+                        <use xlink:href="/images/icons/sprite.svg#close"></use>
+                    </svg>
+                </button>
+                <div class="success__text">
+                    Спасибо!
+                    <br>
+                    Мы добавим Вашу <br>
+                    клинику после обработки <br>
+                    информации
+                </div>
+            </div>
+            <?
+            $html = ob_get_contents();
+            ob_end_clean();
+            return ['html' => $html, 'status' => true];
+        } else {
+            return ['html' => '', 'status' => false];
+        }
+    } else {
+        return ['html' => '', 'status' => false];
+    }
 }
 
 function getCallbackResult()
@@ -233,6 +358,35 @@ function getCallbackResult()
     $html = ob_get_contents();
     ob_end_clean();
     return $html;
+}
+
+function mailTo($addrs, $subject, $html, $file = [])
+{
+    $mail = new PHPMailer(true);
+    $mail->CharSet = $mail::CHARSET_UTF8;
+    try {
+        //Recipients
+        $mail->setFrom('info@web-comp.ru', 'Web-Comp');
+        foreach ($addrs as $addr) {
+            $mail->addAddress($addr, 'Joe User');
+        }
+
+        //Attachments
+        if (!empty($file)) {
+            $mail->addAttachment($file['src'], $file['name']);
+        }
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $html;
+
+        $result = $mail->send();
+        return $result;
+    } catch (Exception $e) {
+        die(print_r($e));
+        return false;
+    }
 }
 
 

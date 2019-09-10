@@ -25,11 +25,11 @@ block content
                             b.banner__stick_g до 50%
             .container
                 //- button
-                a(href='#callme').banner__button ЗАПИСАТЬСЯ НА ПРИЕМ
+                a(href='#callme').jsCallme.banner__button ЗАПИСАТЬСЯ НА ПРИЕМ
             .banner__round
 
         //- services
-        section.servs
+        section.servs#servs
             .servs__title
                 | Аппаратная диагностика
                 br
@@ -45,7 +45,8 @@ block content
                             .serv__content Мы осуществляем более 1500 видов исследований. При обращении к нам вы можете пройти полное лабораторное обследование в удобное для вас время.
                             ul.serv__ul
                                 each i in servList
-                                    li.serv__li= i
+                                    li
+                                        a(href='tel:+ 7(925)455-25-25').serv__li= i
 
         //- advantages
         section.edges
@@ -98,7 +99,7 @@ block content
             .map__img
                 img(src='images/content/map/map.jpg').map__pic
         //- search
-        section.search
+        section.search#clinics
             form.search__form
                 .search__top
                     .search__field

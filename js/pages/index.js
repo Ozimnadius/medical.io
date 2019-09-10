@@ -43,7 +43,7 @@ $(function () {
 
     $('input[name=revDate]').mask('99.99.9999');
 
-    $('body').on('click', '.item__top', function (e) {
+    $('.search').on('click', '.item__top', function (e) {
         let $this = $(this),
             item = $this.closest('.item'),
             bottom = item.find('.item__bottom'),
@@ -104,10 +104,12 @@ $(function () {
             'theme': 'light',
             'callback': verifyCallback,
         });
+        // scrollLock.disablePageScroll(document.body);
     }
 
     $('body').on('click','.form__close, .success__close, .success__button', function (e) {
        popup.removeClass('active');
+        // scrollLock.enablePageScroll(document.body);
     });
 
     $('body').on('click','.form__submit', function (e) {
@@ -119,7 +121,7 @@ $(function () {
         $.ajax({
             dataType: "json",
             type: "POST",
-            url: 'ajax.php',
+            url: 'php/ajax.php',
             data: data,
             success: function (result) {
                 if (result.status) {
@@ -162,7 +164,6 @@ $(function () {
         e.preventDefault();
         let _href = $(this).attr("href");
         $("html, body").animate({scrollTop: $(_href).offset().top-60+"px"});
-
         closeMenu();
     });
 
